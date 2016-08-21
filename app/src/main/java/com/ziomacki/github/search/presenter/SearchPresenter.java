@@ -90,6 +90,7 @@ public class SearchPresenter {
     }
 
     private void search() {
+        searchView.displayDataLoading();
         Subscription subscription = search.search(query).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
