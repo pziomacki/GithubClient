@@ -1,5 +1,6 @@
 package com.ziomacki.github.search.presenter;
 
+import android.text.TextUtils;
 import com.ziomacki.github.search.model.Search;
 import com.ziomacki.github.search.model.SearchableItem;
 import com.ziomacki.github.search.view.SearchView;
@@ -39,8 +40,10 @@ public class SearchPresenter {
     }
 
     public void searchAction(String query) {
-        this.query = query;
-        search();
+        if (!TextUtils.isEmpty(query)) {
+            this.query = query;
+            search();
+        }
     }
 
     private void displayResults(List<SearchableItem> resultItemList) {
