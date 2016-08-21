@@ -17,8 +17,11 @@ import com.ziomacki.github.GithubApplication;
 import com.ziomacki.github.R;
 import com.ziomacki.github.inject.ApplicationComponent;
 import com.ziomacki.github.inject.SearchModule;
+import com.ziomacki.github.search.eventbus.OnUserOpenEvent;
 import com.ziomacki.github.search.model.SearchableItem;
 import com.ziomacki.github.search.presenter.SearchPresenter;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 import javax.inject.Inject;
 import butterknife.BindView;
@@ -157,4 +160,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         Snackbar.make(swipeRefreshLayout, message, Snackbar.LENGTH_LONG).show();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onResultItemClickEvent(OnUserOpenEvent userOpenEvent) {
+        //TODO: implement
+    }
 }

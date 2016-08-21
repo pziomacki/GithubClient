@@ -3,6 +3,12 @@ apply plugin: 'android-apt'
 apply plugin: 'groovyx.grooid.groovy-android'
 apply plugin: 'realm-android'
 
+apt {
+    arguments {
+        eventBusIndex "com.ziomacki.github.GithubBusIndex"
+    }
+}
+
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.1"
