@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import com.ziomacki.github.R;
-import com.ziomacki.github.model.SearchResultItem;
+import com.ziomacki.github.search.model.SearchableItem;
 import java.util.List;
 
 public class SearchActivity extends AppCompatActivity implements SearchView{
@@ -22,7 +22,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     }
 
     @Override
-    public void displayResults(List<SearchResultItem> resultItemList) {
+    public void displayResults(List<SearchableItem> resultItemList) {
         //TODO: implement
     }
 
@@ -35,4 +35,5 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     public void displayErrorMessage() {
         //TODO: implement
     }
+
 }
