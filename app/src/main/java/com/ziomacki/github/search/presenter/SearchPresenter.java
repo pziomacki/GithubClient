@@ -95,7 +95,11 @@ public class SearchPresenter {
     }
 
     private void displayResults(List<SearchableItem> resultItemList) {
-        searchView.displayResults(resultItemList);
+        if (resultItemList.size() > 0) {
+            searchView.displayResults(resultItemList);
+        } else {
+            searchView.displayNoResultsMessage();
+        }
     }
 
     private void search() {
