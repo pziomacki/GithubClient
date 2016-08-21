@@ -7,4 +7,6 @@ import dagger.Component;
 @Component(modules = {NetworkModule.class})
 public interface ApplicationComponent {
     void inject(GithubApplication application);
+
+    SearchComponent searchComponent(SearchModule searchModule);
 }
