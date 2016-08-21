@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
@@ -20,6 +21,7 @@ import com.ziomacki.github.inject.SearchModule;
 import com.ziomacki.github.search.eventbus.OnUserOpenEvent;
 import com.ziomacki.github.search.model.SearchableItem;
 import com.ziomacki.github.search.presenter.SearchPresenter;
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
@@ -42,6 +44,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     SearchPresenter searchPresenter;
     @Inject
     ResultsAdapter resultsAdapter;
+    @Inject
+    EventBus eventBus;
     private Subscription searchInputSubscription = Subscriptions.empty();
     private Subscription refreshSubscription = Subscriptions.empty();
 
@@ -76,9 +80,16 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        eventBus.register(this);
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         searchPresenter.onStop();
+        eventBus.unregister(this);
     }
 
     @Override
