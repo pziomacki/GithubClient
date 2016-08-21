@@ -36,6 +36,15 @@ public class SearchPresenter {
         }
     };
 
+    private Action1 fetchErrorAction = new Action1<Throwable>() {
+        @Override
+        public void call(Throwable throwable) {
+            //TODO: handle specific messages
+            searchView.hideDataLoading();
+            searchView.displayErrorMessage();
+        }
+    };
+
     private Action1 readResultsFromDB = new Action1<List<SearchableItem>>() {
         @Override
         public void call(List<SearchableItem> searchResults) {
@@ -93,14 +102,7 @@ public class SearchPresenter {
         searchView.displayDataLoading();
         Subscription subscription = search.search(query).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                fetchSuccesfulResponseAction,
-                new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        //TODO: implement
-                    }
-                });
+                .subscribe(fetchSuccesfulResponseAction, fetchErrorAction);
         subscriptions.add(subscription);
     }
 
