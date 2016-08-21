@@ -1,6 +1,7 @@
 package com.ziomacki.github.search.model;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResults<SearchableItem> {
@@ -9,6 +10,6 @@ public class SearchResults<SearchableItem> {
     public int totalCount;
 
     @SerializedName("items")
-    public List<SearchableItem> items;
+    public List<SearchableItem> items = new ArrayList<>();
 
 }

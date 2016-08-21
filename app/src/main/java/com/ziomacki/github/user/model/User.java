@@ -14,4 +14,9 @@ public class User implements SearchableItem {
     public String getDisplayName() {
         return login;
     }
+
+    @Override
+    public int getId() {
+        return id;
+    }
 }

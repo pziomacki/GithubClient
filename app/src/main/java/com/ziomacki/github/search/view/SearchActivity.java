@@ -41,6 +41,12 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        searchPresenter.onStop();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         searchInputSubscription.unsubscribe();
