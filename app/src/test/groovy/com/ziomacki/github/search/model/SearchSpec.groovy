@@ -1,7 +1,9 @@
 package com.ziomacki.github.search.model
 
-import com.ziomacki.github.repository.model.GitRepository
+import com.ziomacki.github.repository.model.GitRepo
+import com.ziomacki.github.repository.model.GitRepoRepository
 import com.ziomacki.github.user.model.User
+import com.ziomacki.github.user.model.UserRepository
 import rx.Observable
 import rx.observers.TestSubscriber
 import spock.lang.Specification
@@ -13,7 +15,7 @@ class SearchSpec extends Specification {
             SearchService searchServiceStub = Stub(SearchService)
             searchServiceStub.searchForRepositories("test") >> Observable.just(getGitRepositoryResults())
             searchServiceStub.searchForUsers("test") >> Observable.just(getUserResults())
-            Search sut = new Search(searchServiceStub)
+            Search sut = new Search(searchServiceStub, getUserRepositoryMock(), getGitRepoRepositoryMock())
         when:
             sut.search("test").subscribe(testSubscriber)
             List<SearchableItem> results = testSubscriber.getOnNextEvents().get(0)
@@ -28,9 +30,9 @@ class SearchSpec extends Specification {
         given:
             TestSubscriber<SearchableItem> testSubscriber = new TestSubscriber<>()
             SearchService searchServiceStub = Stub(SearchService)
-            searchServiceStub.searchForRepositories("test") >> Observable.just(new SearchResults<GitRepository>())
+            searchServiceStub.searchForRepositories("test") >> Observable.just(new SearchResults<GitRepo>())
             searchServiceStub.searchForUsers("test") >> Observable.just(new SearchResults<User>())
-            Search sut = new Search(searchServiceStub)
+            Search sut = new Search(searchServiceStub, getUserRepositoryMock(), getGitRepoRepositoryMock())
         when:
             sut.search("test").subscribe(testSubscriber)
             List<SearchableItem> results = testSubscriber.getOnNextEvents().get(0)
@@ -42,9 +44,9 @@ class SearchSpec extends Specification {
         given:
             TestSubscriber<SearchableItem> testSubscriber = new TestSubscriber<>()
             SearchService searchServiceStub = Stub(SearchService)
-            searchServiceStub.searchForRepositories("test") >> Observable.just(new SearchResults<GitRepository>())
+            searchServiceStub.searchForRepositories("test") >> Observable.just(new SearchResults<GitRepo>())
             searchServiceStub.searchForUsers("test") >> Observable.just(getUserResults())
-            Search sut = new Search(searchServiceStub)
+            Search sut = new Search(searchServiceStub, getUserRepositoryMock(), getGitRepoRepositoryMock())
         when:
             sut.search("test").subscribe(testSubscriber)
             List<SearchableItem> results = testSubscriber.getOnNextEvents().get(0)
@@ -60,7 +62,7 @@ class SearchSpec extends Specification {
             SearchService searchServiceStub = Stub(SearchService)
             searchServiceStub.searchForRepositories("test") >> Observable.just(getGitRepositoryResults())
             searchServiceStub.searchForUsers("test") >> Observable.just(new SearchResults<User>())
-            Search sut = new Search(searchServiceStub)
+            Search sut = new Search(searchServiceStub, getUserRepositoryMock(), getGitRepoRepositoryMock())
         when:
             sut.search("test").subscribe(testSubscriber)
             List<SearchableItem> results = testSubscriber.getOnNextEvents().get(0)
@@ -70,12 +72,12 @@ class SearchSpec extends Specification {
             results.get(1).getId() == 4
     }
 
-    SearchResults<GitRepository> getGitRepositoryResults() {
-        GitRepository gitRepository1 = new GitRepository()
-        GitRepository gitRepository2 = new GitRepository()
+    SearchResults<GitRepo> getGitRepositoryResults() {
+        GitRepo gitRepository1 = new GitRepo()
+        GitRepo gitRepository2 = new GitRepo()
         gitRepository1.id = 4
         gitRepository2.id = 3
-        SearchResults<GitRepository> results = new SearchResults<>()
+        SearchResults<GitRepo> results = new SearchResults<>()
         results.items.add(gitRepository1)
         results.items.add(gitRepository2)
         return results
@@ -90,5 +92,13 @@ class SearchSpec extends Specification {
         results.items.add(user1)
         results.items.add(user2)
         return results
+    }
+
+    UserRepository getUserRepositoryMock() {
+        return Mock(UserRepository)
+    }
+
+    GitRepoRepository getGitRepoRepositoryMock() {
+        return Mock(GitRepoRepository)
     }
 }

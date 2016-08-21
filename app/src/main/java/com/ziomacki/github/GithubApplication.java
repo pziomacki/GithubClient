@@ -16,6 +16,7 @@ public class GithubApplication extends Application {
 
     private void initApplicationComponent() {
         applicationComponent = DaggerApplicationComponent.builder()
+
                 .build();
     }
 

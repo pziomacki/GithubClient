@@ -2,8 +2,9 @@ package com.ziomacki.github.repository.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.ziomacki.github.search.model.SearchableItem;
+import io.realm.RealmObject;
 
-public class GitRepository implements SearchableItem {
+public class GitRepo extends RealmObject implements SearchableItem {
 
     //TODO: implement
     @SerializedName("id")

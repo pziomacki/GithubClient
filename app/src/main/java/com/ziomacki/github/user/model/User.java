@@ -2,8 +2,9 @@ package com.ziomacki.github.user.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.ziomacki.github.search.model.SearchableItem;
+import io.realm.RealmObject;
 
-public class User implements SearchableItem {
+public class User extends RealmObject implements SearchableItem{
 
     @SerializedName("login")
     public String login;

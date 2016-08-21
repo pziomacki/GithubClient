@@ -1,6 +1,6 @@
 package com.ziomacki.github.search.model;
 
-import com.ziomacki.github.repository.model.GitRepository;
+import com.ziomacki.github.repository.model.GitRepo;
 import com.ziomacki.github.user.model.User;
 import javax.inject.Inject;
 import rx.Observable;
@@ -18,7 +18,7 @@ public class SearchService {
         return searchApiService.searchUsers(query);
     }
 
-    public Observable<SearchResults<GitRepository>> searchForRepositories(String query) {
+    public Observable<SearchResults<GitRepo>> searchForRepositories(String query) {
         return searchApiService.searchRespositories(query);
     }
 
