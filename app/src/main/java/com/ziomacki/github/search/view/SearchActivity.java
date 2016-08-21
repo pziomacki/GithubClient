@@ -2,12 +2,14 @@ package com.ziomacki.github.search.view;
 
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
+import com.jakewharton.rxbinding.support.v4.widget.RxSwipeRefreshLayout;
 import com.jakewharton.rxbinding.widget.RxSearchView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import com.ziomacki.github.GithubApplication;
@@ -29,11 +31,14 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
 
     @BindView(R.id.search_results_recycler_view)
     RecyclerView resultsRecyclerView;
+    @BindView(R.id.search_swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
     @Inject
     SearchPresenter searchPresenter;
     @Inject
     ResultsAdapter resultsAdapter;
     private Subscription searchInputSubscription = Subscriptions.empty();
+    private Subscription refreshSubscription = Subscriptions.empty();
 
 
     @Override
@@ -43,6 +48,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         ButterKnife.bind(this);
         injectDependencies();
         initRecyclerView();
+        setupRefreshLayout();
         searchPresenter.attachView(this);
         searchPresenter.restoreState(savedInstanceState);
     }
@@ -59,6 +65,10 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         applicationComponent.searchComponent(new SearchModule()).inject(this);
     }
 
+    private void setupRefreshLayout() {
+        refreshSubscription = RxSwipeRefreshLayout.refreshes(swipeRefreshLayout).subscribe(new Refreshed());
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -68,6 +78,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        refreshSubscription.unsubscribe();
         searchInputSubscription.unsubscribe();
     }
 
@@ -113,6 +124,16 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         //TODO: implement
     }
 
+    @Override
+    public void displayDataLoading() {
+        swipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void hideDataLoading() {
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
     class SearchTextChanged implements Action1<CharSequence> {
 
         @Override
@@ -121,4 +142,10 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         }
     }
 
+    class Refreshed implements Action1<Void> {
+        @Override
+        public void call(Void aVoid) {
+            searchPresenter.refresh();
+        }
+    }
 }

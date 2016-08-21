@@ -32,6 +32,7 @@ public class SearchPresenter {
             } else {
                 searchView.displayNoResultsMessage();
             }
+            searchView.hideDataLoading();
         }
     };
 
@@ -104,5 +105,14 @@ public class SearchPresenter {
 
     public void onStop() {
         subscriptions.clear();
+    }
+
+    public void refresh() {
+        if (!TextUtils.isEmpty(query)) {
+            searchView.displayDataLoading();
+            search();
+        } else {
+            searchView.hideDataLoading();
+        }
     }
 }

@@ -7,4 +7,6 @@ public interface SearchView {
     void displayResults(List<SearchableItem> resultItemList);
     void displayNoResultsMessage();
     void displayErrorMessage();
+    void displayDataLoading();
+    void hideDataLoading();
 }
