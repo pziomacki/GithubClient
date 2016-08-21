@@ -11,4 +11,8 @@ public class SearchPresenter {
     public SearchPresenter(Search search) {
         this.search = search;
     }
+
+    public void searchAction(String query) {
+        //TODO: implement
+    }
 }
