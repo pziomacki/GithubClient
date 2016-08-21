@@ -1,5 +1,6 @@
 package com.ziomacki.github.component;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import io.realm.Realm;
@@ -28,5 +29,16 @@ public class RealmWrapper {
         realm.copyToRealm(newList);
         realm.commitTransaction();
         realm.close();
+    }
+
+    public <T extends RealmObject> List<T> getAllItems(Class<T> clazz) {
+        Realm realm = getRealmInstance();
+        List<T> resultsManaged = realm.where(clazz).findAll();
+        List<T> resultsUnmanaged = new ArrayList<>();
+        if (resultsManaged != null) {
+            resultsUnmanaged.addAll(realm.copyFromRealm(resultsManaged));
+        }
+        realm.close();
+        return resultsUnmanaged;
     }
 }
