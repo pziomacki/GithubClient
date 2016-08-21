@@ -2,6 +2,7 @@ package com.ziomacki.github;
 
 import android.app.Application;
 import com.ziomacki.github.inject.ApplicationComponent;
+import com.ziomacki.github.inject.ApplicationModule;
 import com.ziomacki.github.inject.DaggerApplicationComponent;
 
 public class GithubApplication extends Application {
@@ -16,7 +17,7 @@ public class GithubApplication extends Application {
 
     private void initApplicationComponent() {
         applicationComponent = DaggerApplicationComponent.builder()
-
+                .applicationModule(new ApplicationModule(this))
                 .build();
     }
 

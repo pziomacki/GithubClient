@@ -3,10 +3,13 @@ package com.ziomacki.github.search.view;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import com.jakewharton.rxbinding.widget.RxSearchView;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import com.ziomacki.github.GithubApplication;
 import com.ziomacki.github.R;
 import com.ziomacki.github.inject.ApplicationComponent;
@@ -15,6 +18,8 @@ import com.ziomacki.github.search.model.SearchableItem;
 import com.ziomacki.github.search.presenter.SearchPresenter;
 import java.util.List;
 import javax.inject.Inject;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.Subscription;
 import rx.functions.Action1;
 import rx.subscriptions.Subscriptions;
@@ -22,8 +27,12 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class SearchActivity extends AppCompatActivity implements SearchView{
 
+    @BindView(R.id.search_results_recycler_view)
+    RecyclerView resultsRecyclerView;
     @Inject
     SearchPresenter searchPresenter;
+    @Inject
+    ResultsAdapter resultsAdapter;
     private Subscription searchInputSubscription = Subscriptions.empty();
 
 
@@ -31,7 +40,10 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        ButterKnife.bind(this);
         injectDependencies();
+        initRecyclerView();
+        searchPresenter.attachView(this);
     }
 
     private void injectDependencies() {
@@ -69,9 +81,19 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
                 .subscribe(new SearchTextChanged());
     }
 
+    private void initRecyclerView() {
+        resultsRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        HorizontalDividerItemDecoration listDivider = new HorizontalDividerItemDecoration
+                .Builder(this).build();
+        resultsRecyclerView.setLayoutManager(linearLayoutManager);
+        resultsRecyclerView.setAdapter(resultsAdapter);
+        resultsRecyclerView.addItemDecoration(listDivider);
+    }
+
     @Override
     public void displayResults(List<SearchableItem> resultItemList) {
-        //TODO: implement
+        resultsAdapter.setResult(resultItemList);
     }
 
     @Override

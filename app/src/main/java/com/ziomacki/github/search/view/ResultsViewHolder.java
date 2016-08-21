@@ -22,7 +22,7 @@ public class ResultsViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(SearchableItem resultItem) {
         this.resultItem = resultItem;
-        resultItemTitle.setText(resultItem.getDisplayName());
+        resultItemTitle.setText(resultItem.getDisplayName() + " " + resultItem.getId());
     }
 
 }
