@@ -21,7 +21,7 @@ class SearchSpec extends Specification {
             results.get(0).getId() == 1
             results.get(1).getId() == 3
             results.get(2).getId() == 4
-            results.get(3).getId() == 5
+            results.get(3).getId() == 4
     }
 
     def "get empty list if no results were found"() {
@@ -67,13 +67,13 @@ class SearchSpec extends Specification {
         then:
             results.size() == 2
             results.get(0).getId() == 3
-            results.get(1).getId() == 5
+            results.get(1).getId() == 4
     }
 
     SearchResults<GitRepository> getGitRepositoryResults() {
         GitRepository gitRepository1 = new GitRepository()
         GitRepository gitRepository2 = new GitRepository()
-        gitRepository1.id = 5
+        gitRepository1.id = 4
         gitRepository2.id = 3
         SearchResults<GitRepository> results = new SearchResults<>()
         results.items.add(gitRepository1)

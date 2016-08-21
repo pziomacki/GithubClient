@@ -7,7 +7,7 @@ public class GitRepository implements SearchableItem {
 
     //TODO: implement
     @SerializedName("id")
-    public int id;
+    public long id;
 
     @Override
     public String getDisplayName() {
@@ -16,7 +16,7 @@ public class GitRepository implements SearchableItem {
     }
 
     @Override
-    public int getId() {
+    public long getId() {
         return id;
     }
 }

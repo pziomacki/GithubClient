@@ -6,6 +6,12 @@ public class SearchableItemComparatorByIdAsc implements Comparator<SearchableIte
 
     @Override
     public int compare(SearchableItem searchableItemOne, SearchableItem searchableItemTwo) {
-        return searchableItemOne.getId() - searchableItemTwo.getId();
+        if (searchableItemOne.getId() - searchableItemTwo.getId() < 0) {
+            return -1;
+        } else if (searchableItemOne.getId() - searchableItemTwo.getId() > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

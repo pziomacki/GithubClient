@@ -8,7 +8,7 @@ public class User implements SearchableItem {
     @SerializedName("login")
     public String login;
     @SerializedName("id")
-    public int id;
+    public long id;
 
     @Override
     public String getDisplayName() {
@@ -16,7 +16,7 @@ public class User implements SearchableItem {
     }
 
     @Override
-    public int getId() {
+    public long getId() {
         return id;
     }
 }
