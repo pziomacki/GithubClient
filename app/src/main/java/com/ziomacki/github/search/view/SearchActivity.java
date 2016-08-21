@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import com.ziomacki.github.R;
+import com.ziomacki.github.model.SearchResultItem;
+import java.util.List;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements SearchView{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,5 +19,20 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         return true;
+    }
+
+    @Override
+    public void displayResults(List<SearchResultItem> resultItemList) {
+        //TODO: implement
+    }
+
+    @Override
+    public void displayNoResultsMessage() {
+        //TODO: implement
+    }
+
+    @Override
+    public void displayErrorMessage() {
+        //TODO: implement
     }
 }
