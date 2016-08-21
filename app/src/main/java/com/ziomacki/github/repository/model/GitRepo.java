@@ -6,14 +6,14 @@ import io.realm.RealmObject;
 
 public class GitRepo extends RealmObject implements SearchableItem {
 
-    //TODO: implement
     @SerializedName("id")
     public long id;
+    @SerializedName("name")
+    public String name;
 
     @Override
     public String getDisplayName() {
-        //TODO: implement
-        return null;
+        return name;
     }
 
     @Override
