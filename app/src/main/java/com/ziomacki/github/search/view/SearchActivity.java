@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.subscriptions.Subscriptions;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -48,7 +49,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         ButterKnife.bind(this);
         injectDependencies();
         initRecyclerView();
-        setupRefreshLayout();
+        subscribeToSwipeToRefresh();
         searchPresenter.attachView(this);
         searchPresenter.restoreState(savedInstanceState);
     }
@@ -65,8 +66,9 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         applicationComponent.searchComponent(new SearchModule()).inject(this);
     }
 
-    private void setupRefreshLayout() {
-        refreshSubscription = RxSwipeRefreshLayout.refreshes(swipeRefreshLayout).subscribe(new Refreshed());
+    private void subscribeToSwipeToRefresh() {
+        refreshSubscription = RxSwipeRefreshLayout.refreshes(swipeRefreshLayout)
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Refreshed());
     }
 
     @Override
@@ -96,6 +98,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     void subscribeToSearchViewQueries(android.widget.SearchView searchView) {
         searchInputSubscription = RxSearchView.queryTextChanges(searchView).debounce(1L, SECONDS)
                 .skip(1)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SearchTextChanged());
     }
 
