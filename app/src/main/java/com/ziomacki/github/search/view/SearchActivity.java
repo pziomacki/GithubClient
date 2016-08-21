@@ -44,6 +44,13 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         injectDependencies();
         initRecyclerView();
         searchPresenter.attachView(this);
+        searchPresenter.restoreState(savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        searchPresenter.onSaveInstance(outState);
+        super.onSaveInstanceState(outState);
     }
 
     private void injectDependencies() {
