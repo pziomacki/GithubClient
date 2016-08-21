@@ -12,6 +12,8 @@ public class ResultsViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.result_item_title)
     TextView resultItemTitle;
+    @BindView(R.id.result_item_id)
+    TextView resultItemId;
 
     private SearchableItem resultItem;
 
@@ -22,7 +24,8 @@ public class ResultsViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(SearchableItem resultItem) {
         this.resultItem = resultItem;
-        resultItemTitle.setText(resultItem.getDisplayName() + " " + resultItem.getId());
+        resultItemTitle.setText(resultItem.getDisplayName());
+        resultItemId.setText(Long.toString(resultItem.getId()));
     }
 
 }

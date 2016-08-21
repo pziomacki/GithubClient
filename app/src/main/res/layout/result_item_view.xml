@@ -4,9 +4,11 @@
     android:id="@+id/result_item_container"
     android:layout_width="match_parent"
     android:layout_height="@dimen/result_item_height"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/result_item_horizontal_margin"
+    android:paddingRight="@dimen/result_item_horizontal_margin"
+    android:paddingTop="@dimen/result_item_vertical_margin"
     android:clickable="true"
+    android:orientation="vertical"
     android:background="?attr/selectableItemBackground">
 
     <TextView
@@ -15,7 +17,14 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textSize="@dimen/result_item_title_size"
-        android:layout_gravity="center_vertical"/>
+        android:textSize="@dimen/result_item_title_size"/>
+
+    <TextView
+        android:id="@+id/result_item_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="@dimen/result_item_id_size"/>
 
 </LinearLayout>

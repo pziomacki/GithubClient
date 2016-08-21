@@ -5,6 +5,8 @@
 
     <!--results -->
     <dimen name="result_item_height">72dp</dimen>
-    <dimen name="result_item_vertical_margin">8dp</dimen>
+    <dimen name="result_item_vertical_margin">16dp</dimen>
+    <dimen name="result_item_horizontal_margin">16dp</dimen>
     <dimen name="result_item_title_size">16sp</dimen>
+    <dimen name="result_item_id_size">12sp</dimen>
 </resources>
