@@ -1,6 +1,7 @@
 package com.ziomacki.github.search.view;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -119,12 +120,12 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
 
     @Override
     public void displayNoResultsMessage() {
-        //TODO: implement
+        displaySnackbar(getString(R.string.search_no_results));
     }
 
     @Override
     public void displayErrorMessage() {
-        //TODO: implement
+        displaySnackbar(getString(R.string.search_error_message));
     }
 
     @Override
@@ -151,4 +152,9 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
             searchPresenter.refresh();
         }
     }
+
+    private void displaySnackbar(String message) {
+        Snackbar.make(swipeRefreshLayout, message, Snackbar.LENGTH_LONG).show();
+    }
+
 }
