@@ -16,10 +16,20 @@ public class User extends RealmObject implements SearchableItem{
     public long id;
     @SerializedName("login")
     public String login;
+    @SerializedName("name")
+    public String name;
+    @SerializedName("avatar_url")
+    public String avatarUrl;
+    @SerializedName("followers")
+    public int followers;
+    public boolean isAllDataFetched = false;
 
     @Override
     public String getDisplayName() {
-        return login;
+        if (name == null) {
+            return login;
+        }
+        return name;
     }
 
     @Override

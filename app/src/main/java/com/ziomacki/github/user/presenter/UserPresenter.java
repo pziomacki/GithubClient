@@ -63,12 +63,13 @@ public class UserPresenter {
 
     private void handleLoadedUser(User user) {
         this.user = user;
-        userView.displayName(user.getDisplayName());
+        displayUserData();
         fetchUserData();
     }
 
     private void handleFetchedUser(User user) {
         this.user = user;
+        displayUserData();
     }
 
     private void fetchUserData() {
@@ -78,5 +79,13 @@ public class UserPresenter {
 
     public void onStop() {
         subscriptions.clear();
+    }
+
+    private void displayUserData() {
+        userView.displayAvatar(user.avatarUrl);
+        if (user.isAllDataFetched) {
+            userView.displayName(user.name);
+            userView.displayFollowersCount(user.followers);
+        }
     }
 }

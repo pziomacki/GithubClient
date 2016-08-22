@@ -18,6 +18,7 @@ public class UserFetch {
         return userService.fetchUser(userLogin).doOnNext(new Action1<User>() {
             @Override
             public void call(User user) {
+                user.isAllDataFetched = true;
                 userRepository.copyOrUpdateUser(user);
             }
         });
