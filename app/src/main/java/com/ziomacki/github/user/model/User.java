@@ -7,7 +7,7 @@ import com.ziomacki.github.search.model.SearchableItem;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class User extends RealmObject implements SearchableItem{
+public class User extends RealmObject implements SearchableItem {
 
     public static final String KEY_ID = "id";
 
@@ -22,6 +22,9 @@ public class User extends RealmObject implements SearchableItem{
     public String avatarUrl;
     @SerializedName("followers")
     public int followers;
+    @SerializedName("public_repos")
+    public int publicRepos;
+
     public boolean isAllDataFetched = false;
 
     @Override

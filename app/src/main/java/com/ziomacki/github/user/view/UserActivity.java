@@ -27,8 +27,8 @@ public class UserActivity extends AppCompatActivity implements UserView{
     TextView nameView;
     @BindView(R.id.user_followers)
     TextView followersView;
-    @BindView(R.id.user_stars)
-    TextView starsView;
+    @BindView(R.id.user_repositories)
+    TextView repositoriesView;
     @BindView(R.id.user_container)
     LinearLayout mainContainer;
     @Inject
@@ -78,8 +78,8 @@ public class UserActivity extends AppCompatActivity implements UserView{
     }
 
     @Override
-    public void displayStarsCount(int starsCount) {
-        //TODO: implement
+    public void displayRepositoriesCount(int repositoriesCount) {
+        repositoriesView.setText(String.format(getString(R.string.user_repositories), repositoriesCount));
     }
 
     @Override

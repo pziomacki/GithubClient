@@ -86,6 +86,7 @@ public class UserPresenter {
         if (user.isAllDataFetched) {
             userView.displayName(user.getDisplayName());
             userView.displayFollowersCount(user.followers);
+            userView.displayRepositoriesCount(user.publicRepos);
         }
     }
 
