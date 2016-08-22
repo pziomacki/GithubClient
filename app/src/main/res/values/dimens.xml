@@ -9,4 +9,10 @@
     <dimen name="result_item_horizontal_margin">16dp</dimen>
     <dimen name="result_item_title_size">16sp</dimen>
     <dimen name="result_item_id_size">12sp</dimen>
+
+    <!-- user -->
+    <dimen name="user_avatar_dimen">120dp</dimen>
+    <dimen name="user_name_size">18sp</dimen>
+    <dimen name="user_info_text_size">14sp</dimen>
+    <dimen name="user_texts_padding_top">16dp</dimen>
 </resources>

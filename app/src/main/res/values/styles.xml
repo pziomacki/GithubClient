@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="UserTextView">
+        <item name="android:layout_marginTop">@dimen/user_texts_padding_top</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
 </resources>
