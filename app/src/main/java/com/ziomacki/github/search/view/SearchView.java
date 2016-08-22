@@ -9,4 +9,5 @@ public interface SearchView {
     void displayErrorMessage();
     void displayDataLoading();
     void hideDataLoading();
+    void openUserView(long id);
 }

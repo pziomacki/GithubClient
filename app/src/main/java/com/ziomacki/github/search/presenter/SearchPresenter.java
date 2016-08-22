@@ -2,6 +2,7 @@ package com.ziomacki.github.search.presenter;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import com.ziomacki.github.search.eventbus.OnUserOpenEvent;
 import com.ziomacki.github.search.model.Search;
 import com.ziomacki.github.search.model.SearchResultsRepository;
 import com.ziomacki.github.search.model.SearchSavedInstanceHelper;
@@ -121,5 +122,9 @@ public class SearchPresenter {
         } else {
             searchView.hideDataLoading();
         }
+    }
+
+    public void onUserOpenEvent(OnUserOpenEvent event) {
+        searchView.openUserView(event.id);
     }
 }

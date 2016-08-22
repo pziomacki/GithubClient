@@ -20,6 +20,7 @@ import com.ziomacki.github.inject.SearchModule;
 import com.ziomacki.github.search.eventbus.OnUserOpenEvent;
 import com.ziomacki.github.search.model.SearchableItem;
 import com.ziomacki.github.search.presenter.SearchPresenter;
+import com.ziomacki.github.user.view.UserActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -172,6 +173,11 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onResultItemClickEvent(OnUserOpenEvent userOpenEvent) {
-        //TODO: implement
+        searchPresenter.onUserOpenEvent(userOpenEvent);
+    }
+
+    @Override
+    public void openUserView(long id) {
+        UserActivity.startActivity(this, id);
     }
 }

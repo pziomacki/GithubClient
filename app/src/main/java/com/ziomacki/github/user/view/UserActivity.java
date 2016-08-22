@@ -1,5 +1,7 @@
 package com.ziomacki.github.user.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -13,6 +15,7 @@ import butterknife.BindView;
 
 public class UserActivity extends AppCompatActivity implements UserView{
 
+
     @BindView(R.id.user_avater)
     ImageView avatar;
     @BindView(R.id.user_name)
@@ -25,10 +28,18 @@ public class UserActivity extends AppCompatActivity implements UserView{
     @Inject
     UserPresenter userPresenter;
 
+    public static void startActivity(Context context, long userId) {
+        Intent intent = new Intent(context, UserActivity.class);
+        intent.putExtra(UserPresenter.KEY_ID, userId);
+        context.startActivity(intent);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         injectDependencies();
+        userPresenter.attachView(this);
+        userPresenter.readIntentExtras(getIntent().getExtras());
     }
 
     private void injectDependencies() {
