@@ -8,6 +8,8 @@ import io.realm.RealmObject;
 
 public class User extends RealmObject implements SearchableItem{
 
+    public static final String KEY_ID = "id";
+
     @SerializedName("login")
     public String login;
     @SerializedName("id")

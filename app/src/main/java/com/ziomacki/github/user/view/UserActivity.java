@@ -4,7 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.ziomacki.github.GithubApplication;
 import com.ziomacki.github.R;
+import com.ziomacki.github.inject.ApplicationComponent;
+import com.ziomacki.github.user.presenter.UserPresenter;
+import javax.inject.Inject;
 import butterknife.BindView;
 
 public class UserActivity extends AppCompatActivity implements UserView{
@@ -17,10 +21,20 @@ public class UserActivity extends AppCompatActivity implements UserView{
     TextView followers;
     @BindView(R.id.user_stars)
     TextView stars;
-    
+
+    @Inject
+    UserPresenter userPresenter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        injectDependencies();
+    }
+
+    private void injectDependencies() {
+        ApplicationComponent applicationComponent =
+                ((GithubApplication) getApplication()).getApplicationComponent();
+        applicationComponent.userComponent().inject(this);
     }
 
     @Override
