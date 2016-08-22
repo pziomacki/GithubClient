@@ -32,7 +32,7 @@ public class UserPresenter {
     private Action1<Throwable> fetchUserError = new Action1<Throwable>() {
         @Override
         public void call(Throwable throwable) {
-
+            userView.displayErrorMessage();
         }
     };
 

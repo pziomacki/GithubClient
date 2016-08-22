@@ -8,4 +8,6 @@
 
     <!--User screen-->
     <string name="user_followers">Followers: %d</string>
+    <string name="user_error_message">Something went wrong.</string>
+
 </resources>

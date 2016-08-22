@@ -6,4 +6,6 @@ public interface UserView {
     void displayStarsCount(int starsCount);
     void displayFollowersCount(int followersCount);
     void displayAvatarPlaceholder();
+    void displayErrorMessage();
+
 }
