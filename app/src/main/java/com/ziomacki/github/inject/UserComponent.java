@@ -4,7 +4,7 @@ import com.ziomacki.github.user.view.UserActivity;
 import dagger.Subcomponent;
 
 @ActivityScope
-@Subcomponent
+@Subcomponent(modules = {UserModule.class})
 public interface UserComponent {
     void inject(UserActivity userActivity);
 }

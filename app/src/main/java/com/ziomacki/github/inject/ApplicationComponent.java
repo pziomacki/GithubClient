@@ -9,5 +9,5 @@ public interface ApplicationComponent {
     void inject(GithubApplication application);
 
     SearchComponent searchComponent(SearchModule searchModule);
-    UserComponent userComponent();
+    UserComponent userComponent(UserModule userModule);
 }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.ziomacki.github.GithubApplication;
 import com.ziomacki.github.R;
 import com.ziomacki.github.inject.ApplicationComponent;
+import com.ziomacki.github.inject.UserModule;
 import com.ziomacki.github.user.presenter.UserPresenter;
 import javax.inject.Inject;
 import butterknife.BindView;
@@ -54,7 +55,7 @@ public class UserActivity extends AppCompatActivity implements UserView{
     private void injectDependencies() {
         ApplicationComponent applicationComponent =
                 ((GithubApplication) getApplication()).getApplicationComponent();
-        applicationComponent.userComponent().inject(this);
+        applicationComponent.userComponent(new UserModule()).inject(this);
     }
 
     @Override
