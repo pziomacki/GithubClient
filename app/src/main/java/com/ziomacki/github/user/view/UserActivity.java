@@ -12,18 +12,19 @@ import com.ziomacki.github.inject.ApplicationComponent;
 import com.ziomacki.github.user.presenter.UserPresenter;
 import javax.inject.Inject;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class UserActivity extends AppCompatActivity implements UserView{
 
 
     @BindView(R.id.user_avater)
-    ImageView avatar;
+    ImageView avatarView;
     @BindView(R.id.user_name)
-    TextView name;
+    TextView nameView;
     @BindView(R.id.user_followers)
-    TextView followers;
+    TextView followersView;
     @BindView(R.id.user_stars)
-    TextView stars;
+    TextView starsView;
 
     @Inject
     UserPresenter userPresenter;
@@ -37,9 +38,17 @@ public class UserActivity extends AppCompatActivity implements UserView{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user);
+        ButterKnife.bind(this);
         injectDependencies();
         userPresenter.attachView(this);
         userPresenter.readIntentExtras(getIntent().getExtras());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        userPresenter.onStop();
     }
 
     private void injectDependencies() {
@@ -55,7 +64,7 @@ public class UserActivity extends AppCompatActivity implements UserView{
 
     @Override
     public void displayName(String name) {
-        //TODO: implement
+        nameView.setText(name);
     }
 
     @Override
