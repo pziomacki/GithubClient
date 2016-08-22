@@ -1,7 +1,8 @@
 package com.ziomacki.github.user.view;
 
-import com.ziomacki.github.user.model.User;
-
 public interface UserView {
-    public void displayUserInfo(User user);
+    void displayAvatar(String url);
+    void displayName(String name);
+    void displayStarsCount(int starsCount);
+    void displayFollowersCount(int followersCount);
 }
