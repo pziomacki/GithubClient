@@ -10,4 +10,5 @@ public interface SearchView {
     void displayDataLoading();
     void hideDataLoading();
     void openUserView(long id);
+    void setSearchQuery(String query);
 }

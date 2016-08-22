@@ -48,7 +48,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     EventBus eventBus;
     private Subscription searchInputSubscription = Subscriptions.empty();
     private Subscription refreshSubscription = Subscriptions.empty();
-
+    private android.widget.SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,11 +103,18 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.action_search);
-        android.widget.SearchView searchView = (android.widget.SearchView) MenuItemCompat.getActionView(item);
+        searchView = (android.widget.SearchView) MenuItemCompat.getActionView(item);
         searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN | EditorInfo.IME_ACTION_SEARCH);
         searchView.setIconified(false);
         subscribeToSearchViewQueries(searchView);
+        searchView.clearFocus();
+        searchPresenter.onCreateOptionsMenu();
         return true;
+    }
+
+    @Override
+    public void setSearchQuery(String query) {
+        searchView.setQuery(query, false);
     }
 
     void subscribeToSearchViewQueries(android.widget.SearchView searchView) {
