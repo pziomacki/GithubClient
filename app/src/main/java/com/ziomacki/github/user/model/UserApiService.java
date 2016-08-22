@@ -7,6 +7,6 @@ import rx.Observable;
 public interface UserApiService {
 
     @GET("users/{user}")
-    Observable<User> fetchUser(@Path("user") String userName);
+    Observable<User> fetchUser(@Path("user") String userLogin);
 
 }

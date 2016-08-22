@@ -1,0 +1,25 @@
+package com.ziomacki.github.user.model;
+
+import javax.inject.Inject;
+import rx.Observable;
+import rx.functions.Action1;
+
+public class UserFetch {
+
+    private UserService userService;
+    private UserRepository userRepository;
+
+    @Inject
+    public UserFetch(UserService userService) {
+        this.userService = userService;
+    }
+
+    public Observable<User> fetchUser(String userLogin) {
+        return userService.fetchUser(userLogin).doOnNext(new Action1<User>() {
+            @Override
+            public void call(User user) {
+                userRepository.copyOrUpdateUser(user);
+            }
+        });
+    }
+}

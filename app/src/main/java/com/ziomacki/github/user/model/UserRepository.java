@@ -42,4 +42,12 @@ public class UserRepository {
             }
         });
     }
+
+    public void copyOrUpdateUser(User user) {
+        Realm realm = realmWrapper.getRealmInstance();
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(user);
+        realm.commitTransaction();
+        realm.close();
+    }
 }

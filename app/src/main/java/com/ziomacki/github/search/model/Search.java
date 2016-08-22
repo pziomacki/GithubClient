@@ -33,7 +33,7 @@ public class Search {
         return Observable.zip(userSearchObservable, repoSearchObservable, new ZipSearchResults());
     }
 
-    private static class ZipSearchResults
+    private class ZipSearchResults
             implements Func2<SearchResults<User>, SearchResults<GitRepo>, List<SearchableItem>> {
 
         @Override
