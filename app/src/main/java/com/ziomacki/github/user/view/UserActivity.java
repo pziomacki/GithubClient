@@ -75,6 +75,6 @@ public class UserActivity extends AppCompatActivity implements UserView{
 
     @Override
     public void displayFollowersCount(int followersCount) {
-        //TODO: implement
+        followersView.setText(String.format(getString(R.string.user_followers), followersCount));
     }
 }

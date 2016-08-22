@@ -5,4 +5,7 @@
     <string name="search_hint">Search github...</string>
     <string name="search_error_message">Something went wrong. Try again!</string>
     <string name="search_no_results">No results were found for your query.</string>
+
+    <!--User screen-->
+    <string name="user_followers">Followers: %d</string>
 </resources>

@@ -10,8 +10,9 @@ public class UserFetch {
     private UserRepository userRepository;
 
     @Inject
-    public UserFetch(UserService userService) {
+    public UserFetch(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     public Observable<User> fetchUser(String userLogin) {
