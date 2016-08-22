@@ -30,7 +30,7 @@ public class ResultsViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(SearchableItem resultItem, EventBus eventBus) {
         this.resultItem = resultItem;
-        resultItemTitle.setText(resultItem.getDisplayName());
+        resultItemTitle.setText(resultItem.getNameForList());
         resultItemId.setText(Long.toString(resultItem.getId()));
         mainContainer.setOnClickListener(new OnResultsItemClickListener(eventBus,
                 resultItem.getSearchableItemOpenEvent()));

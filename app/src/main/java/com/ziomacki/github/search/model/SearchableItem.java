@@ -4,7 +4,7 @@ import com.ziomacki.github.search.eventbus.SearchableItemOpenEvent;
 
 public interface SearchableItem {
 
-    String getDisplayName();
+    String getNameForList();
     long getId();
     SearchableItemOpenEvent getSearchableItemOpenEvent();
 

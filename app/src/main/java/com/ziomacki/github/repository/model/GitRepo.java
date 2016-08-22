@@ -14,7 +14,7 @@ public class GitRepo extends RealmObject implements SearchableItem {
     public String name;
 
     @Override
-    public String getDisplayName() {
+    public String getNameForList() {
         return name;
     }
 

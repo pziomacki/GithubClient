@@ -28,11 +28,8 @@ public class User extends RealmObject implements SearchableItem {
     public boolean isAllDataFetched = false;
 
     @Override
-    public String getDisplayName() {
-        if (name == null) {
-            return login;
-        }
-        return name;
+    public String getNameForList() {
+        return login;
     }
 
     @Override

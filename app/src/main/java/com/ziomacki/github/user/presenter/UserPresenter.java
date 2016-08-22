@@ -84,7 +84,7 @@ public class UserPresenter {
     private void displayUserData() {
         displayUserAvatar();
         if (user.isAllDataFetched) {
-            userView.displayName(user.getDisplayName());
+            userView.displayName(user.name);
             userView.displayFollowersCount(user.followers);
             userView.displayRepositoriesCount(user.publicRepos);
         }
