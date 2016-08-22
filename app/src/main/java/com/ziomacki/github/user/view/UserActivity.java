@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 import com.ziomacki.github.GithubApplication;
 import com.ziomacki.github.R;
 import com.ziomacki.github.inject.ApplicationComponent;
@@ -60,7 +61,12 @@ public class UserActivity extends AppCompatActivity implements UserView{
 
     @Override
     public void displayAvatar(String url) {
-        //TODO: implement
+        Picasso.with(this).load(url).noFade().placeholder(R.drawable.avatar_placeholder).into(avatarView);
+    }
+
+    @Override
+    public void displayAvatarPlaceholder() {
+        avatarView.setImageResource(R.drawable.avatar_placeholder);
     }
 
     @Override

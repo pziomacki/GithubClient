@@ -88,4 +88,16 @@ public class UserPresenter {
             userView.displayFollowersCount(user.followers);
         }
     }
+
+    private void displayUserAvatar() {
+        if (isNotEmpty(user.avatarUrl)) {
+            userView.displayAvatar(user.avatarUrl);
+        } else {
+            userView.displayAvatarPlaceholder();
+        }
+    }
+
+    private boolean isNotEmpty(String string) {
+        return string!=null && !string.equals("");
+    }
 }

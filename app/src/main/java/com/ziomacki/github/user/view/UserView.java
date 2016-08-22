@@ -5,4 +5,5 @@ public interface UserView {
     void displayName(String name);
     void displayStarsCount(int starsCount);
     void displayFollowersCount(int followersCount);
+    void displayAvatarPlaceholder();
 }
