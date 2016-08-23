@@ -97,11 +97,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         super.onStop();
         searchPresenter.onStop();
         eventBus.unregister(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
         refreshSubscription.unsubscribe();
         searchInputSubscription.unsubscribe();
     }
@@ -134,7 +129,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         searchView.clearFocus();
         subscribeToSearchViewQueries(searchView);
     }
-
 
     @Override
     public void displayResults(List<SearchableItem> resultItemList) {
