@@ -97,6 +97,11 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         super.onStop();
         searchPresenter.onStop();
         eventBus.unregister(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         refreshSubscription.unsubscribe();
         searchInputSubscription.unsubscribe();
     }
