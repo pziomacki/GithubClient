@@ -83,12 +83,12 @@ public class UserPresenter {
     }
 
     void displayUserData() {
-        displayUserAvatar(userView, user.avatarUrl);
+        displayUserAvatar();
         userView.displayLogin(user.login);
-        displayDetaisIfDownloaded(userView, user);
+        displayDetailsIfDownloaded();
     }
 
-    private void displayDetaisIfDownloaded(UserView userView, User user) {
+    private void displayDetailsIfDownloaded() {
         if (user.isAllDataFetched) {
             userView.displayName(user.name);
             userView.displayFollowersCount(user.followers);
@@ -96,9 +96,9 @@ public class UserPresenter {
         }
     }
 
-    private void displayUserAvatar(UserView userView, String avatarUrl) {
-        if (!TextUtils.isEmpty(avatarUrl)) {
-            userView.displayAvatar(avatarUrl);
+    private void displayUserAvatar() {
+        if (!TextUtils.isEmpty(user.avatarUrl)) {
+            userView.displayAvatar(user.avatarUrl);
         } else {
             userView.displayAvatarPlaceholder();
         }
