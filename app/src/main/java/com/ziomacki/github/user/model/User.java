@@ -9,6 +9,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class User extends RealmObject implements SearchableItem {
 
+    public static final String TYPE = "USER";
     public static final String KEY_ID = "id";
 
     @SerializedName("id")
@@ -40,5 +41,10 @@ public class User extends RealmObject implements SearchableItem {
     @Override
     public SearchableItemOpenEvent getSearchableItemOpenEvent() {
         return new OnUserOpenEvent(id);
+    }
+
+    @Override
+    public String getItemType() {
+        return TYPE;
     }
 }

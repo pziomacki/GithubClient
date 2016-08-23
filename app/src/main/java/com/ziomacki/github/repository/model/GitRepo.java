@@ -8,6 +8,8 @@ import io.realm.RealmObject;
 
 public class GitRepo extends RealmObject implements SearchableItem {
 
+    private static final String TYPE = "GIT_REPO";
+
     @SerializedName("id")
     public long id;
     @SerializedName("name")
@@ -26,5 +28,10 @@ public class GitRepo extends RealmObject implements SearchableItem {
     @Override
     public SearchableItemOpenEvent getSearchableItemOpenEvent() {
         return new OnGitRepoOpenEvent(id);
+    }
+
+    @Override
+    public String getItemType() {
+        return TYPE;
     }
 }
