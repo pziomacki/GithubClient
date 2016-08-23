@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.inputmethod.EditorInfo;
 import com.jakewharton.rxbinding.support.v4.widget.RxSwipeRefreshLayout;
 import com.jakewharton.rxbinding.widget.RxSearchView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -104,10 +103,10 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.action_search);
         searchView = (android.widget.SearchView) MenuItemCompat.getActionView(item);
-        searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN | EditorInfo.IME_ACTION_SEARCH);
         searchView.setIconified(false);
-        subscribeToSearchViewQueries(searchView);
+        searchView.setQueryHint(getString(R.string.search_hint));
         searchView.clearFocus();
+        subscribeToSearchViewQueries(searchView);
         searchPresenter.onCreateOptionsMenu();
         return true;
     }
