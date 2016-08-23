@@ -15,4 +15,16 @@ class GitRepoRepositorySpec extends Specification {
         then:
             1 * realmWrapperMock.deleteOldAndStoreNewList(GitRepo.class, list)
     }
+
+    def "dont store null list"() {
+        given:
+            RealmWrapper realmWrapperMock = Mock(RealmWrapper)
+            GitRepoRepository sut = new GitRepoRepository(realmWrapperMock)
+            List<GitRepo> list = null
+        when:
+            sut.deleteOldAndStoreNewList(list)
+        then:
+            thrown IllegalArgumentException
+    }
+
 }

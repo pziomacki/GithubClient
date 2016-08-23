@@ -17,7 +17,11 @@ public class UserRepository {
     }
 
     public void deleteOldAndStoreNewUserList(List<User> userList) {
-        realmWrapper.deleteOldAndStoreNewList(User.class, userList);
+        if (userList!=null) {
+            realmWrapper.deleteOldAndStoreNewList(User.class, userList);
+        } else {
+            throw new IllegalArgumentException("userList must be set");
+        }
     }
 
     public User getUserById(long id) {
@@ -44,10 +48,14 @@ public class UserRepository {
     }
 
     public void copyOrUpdateUser(User user) {
-        Realm realm = realmWrapper.getRealmInstance();
-        realm.beginTransaction();
-        realm.copyToRealmOrUpdate(user);
-        realm.commitTransaction();
-        realm.close();
+        if (user != null) {
+            Realm realm = realmWrapper.getRealmInstance();
+            realm.beginTransaction();
+            realm.copyToRealmOrUpdate(user);
+            realm.commitTransaction();
+            realm.close();
+        } else {
+            throw new IllegalArgumentException("User must be set");
+        }
     }
 }

@@ -14,6 +14,11 @@ public class GitRepoRepository {
     }
 
     public void deleteOldAndStoreNewList(List<GitRepo> gitRepoList) {
-        realmWrapper.deleteOldAndStoreNewList(GitRepo.class, gitRepoList);
+        if (gitRepoList != null) {
+            realmWrapper.deleteOldAndStoreNewList(GitRepo.class, gitRepoList);
+        } else {
+
+            throw new IllegalArgumentException("userList must be set");
+        }
     }
 }
