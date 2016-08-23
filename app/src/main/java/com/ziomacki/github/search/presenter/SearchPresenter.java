@@ -1,7 +1,7 @@
 package com.ziomacki.github.search.presenter;
 
 import android.os.Bundle;
-import android.text.TextUtils;
+import com.ziomacki.github.component.TextUtils;
 import com.ziomacki.github.search.eventbus.OnUserOpenEvent;
 import com.ziomacki.github.search.model.Search;
 import com.ziomacki.github.search.model.SearchResultsRepository;
@@ -23,6 +23,7 @@ public class SearchPresenter {
     private SearchResultsRepository searchResultsRepository;
     private String query = "";
     private boolean isSearchSuccessful = false;
+    private TextUtils textUtils;
 
     private Action1 fetchSuccesfulResponseAction = new Action1<List<SearchableItem>>() {
         @Override
@@ -56,9 +57,10 @@ public class SearchPresenter {
     };
 
     @Inject
-    public SearchPresenter(Search search, SearchResultsRepository searchResultsRepository) {
+    public SearchPresenter(Search search, SearchResultsRepository searchResultsRepository, TextUtils textUtils) {
         this.search = search;
         this.searchResultsRepository = searchResultsRepository;
+        this.textUtils = textUtils;
     }
 
     public void attachView(SearchView searchView) {
@@ -90,7 +92,7 @@ public class SearchPresenter {
     }
 
     public void searchAction(String query) {
-        if (!TextUtils.isEmpty(query)) {
+        if (textUtils.isNotEmpty(query)) {
             this.query = query;
             search();
         }
@@ -109,7 +111,7 @@ public class SearchPresenter {
     }
 
     public void refresh() {
-        if (!TextUtils.isEmpty(query)) {
+        if (textUtils.isNotEmpty(query)) {
             searchView.displayDataLoading();
             search();
         } else {

@@ -107,7 +107,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     }
 
     void subscribeToSearchViewQueries(android.widget.SearchView searchView) {
-        searchInputSubscription = RxSearchView.queryTextChanges(searchView).debounce(500L, MILLISECONDS)
+        searchInputSubscription = RxSearchView.queryTextChanges(searchView).debounce(1L, MILLISECONDS)
                 .skip(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SearchTextChanged());

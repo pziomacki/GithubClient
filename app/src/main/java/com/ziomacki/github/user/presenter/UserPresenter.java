@@ -1,7 +1,7 @@
 package com.ziomacki.github.user.presenter;
 
 import android.os.Bundle;
-import android.text.TextUtils;
+import com.ziomacki.github.component.TextUtils;
 import com.ziomacki.github.user.model.User;
 import com.ziomacki.github.user.model.UserFetch;
 import com.ziomacki.github.user.model.UserRepository;
@@ -22,6 +22,7 @@ public class UserPresenter {
     private User user;
     private long userId;
     private CompositeSubscription subscriptions = new CompositeSubscription();
+    private TextUtils textUtils;
 
     private Action1<User> fetchUserSuccessful = new Action1<User>() {
         @Override
@@ -38,9 +39,10 @@ public class UserPresenter {
     };
 
     @Inject
-    public UserPresenter(UserRepository userRepository, UserFetch userFetch) {
+    public UserPresenter(UserRepository userRepository, UserFetch userFetch, TextUtils textUtils) {
         this.userRepository = userRepository;
         this.userFetch = userFetch;
+        this.textUtils = textUtils;
     }
 
     public void attachView(UserView userView) {
@@ -82,7 +84,7 @@ public class UserPresenter {
         subscriptions.clear();
     }
 
-    void displayUserData() {
+    private void displayUserData() {
         displayUserAvatar();
         userView.displayLogin(user.login);
         displayDetailsIfDownloaded();
@@ -97,7 +99,7 @@ public class UserPresenter {
     }
 
     private void displayUserAvatar() {
-        if (!TextUtils.isEmpty(user.avatarUrl)) {
+        if (textUtils.isNotEmpty(user.avatarUrl)) {
             userView.displayAvatar(user.avatarUrl);
         } else {
             userView.displayAvatarPlaceholder();

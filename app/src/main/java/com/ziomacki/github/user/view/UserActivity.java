@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class UserActivity extends AppCompatActivity implements UserView{
+    public static final String KEY_ID = "KEY_ID";
 
     @BindView(R.id.user_avater)
     ImageView avatarView;
