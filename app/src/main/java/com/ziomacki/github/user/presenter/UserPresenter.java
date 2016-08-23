@@ -83,6 +83,11 @@ public class UserPresenter {
 
     private void displayUserData() {
         displayUserAvatar();
+        userView.displayLogin(user.login);
+        displayDetaisIfDownloaded();
+    }
+
+    private void displayDetaisIfDownloaded() {
         if (user.isAllDataFetched) {
             userView.displayName(user.name);
             userView.displayFollowersCount(user.followers);
