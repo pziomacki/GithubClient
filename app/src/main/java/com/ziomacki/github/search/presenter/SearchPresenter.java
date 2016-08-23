@@ -29,10 +29,10 @@ public class SearchPresenter {
         public void call(List<SearchableItem> searchResults) {
             if (searchResults.size() > 0) {
                 isSearchSuccessful = true;
-                displayResults(searchResults);
             } else {
                 searchView.displayNoResultsMessage();
             }
+            searchView.displayResults(searchResults);
             searchView.hideDataLoading();
         }
     };
@@ -50,7 +50,7 @@ public class SearchPresenter {
         @Override
         public void call(List<SearchableItem> searchResults) {
             if (searchResults.size() > 0) {
-                displayResults(searchResults);
+                searchView.displayResults(searchResults);
             }
         }
     };
@@ -92,14 +92,6 @@ public class SearchPresenter {
         if (!TextUtils.isEmpty(query)) {
             this.query = query;
             search();
-        }
-    }
-
-    private void displayResults(List<SearchableItem> resultItemList) {
-        if (resultItemList.size() > 0) {
-            searchView.displayResults(resultItemList);
-        } else {
-            searchView.displayNoResultsMessage();
         }
     }
 
