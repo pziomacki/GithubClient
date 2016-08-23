@@ -15,3 +15,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn sun.misc.Unsafe
+-dontwarn okio.**
+-dontwarn retrofit2.**
+-dontwarn com.squareup.okhttp.**
