@@ -29,7 +29,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.subscriptions.Subscriptions;
-import static java.util.concurrent.TimeUnit.SECONDS;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 public class SearchActivity extends AppCompatActivity implements SearchView{
 
@@ -107,7 +107,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     }
 
     void subscribeToSearchViewQueries(android.widget.SearchView searchView) {
-        searchInputSubscription = RxSearchView.queryTextChanges(searchView).debounce(1L, SECONDS)
+        searchInputSubscription = RxSearchView.queryTextChanges(searchView).debounce(500L, MILLISECONDS)
                 .skip(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SearchTextChanged());
