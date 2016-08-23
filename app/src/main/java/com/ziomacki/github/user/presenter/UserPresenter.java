@@ -21,6 +21,7 @@ public class UserPresenter {
     private User user;
     private long userId;
     private CompositeSubscription subscriptions = new CompositeSubscription();
+    private DisplayUserDataWrapper displayUserDataWrapper;
 
     private Action1<User> fetchUserSuccessful = new Action1<User>() {
         @Override
@@ -37,9 +38,10 @@ public class UserPresenter {
     };
 
     @Inject
-    public UserPresenter(UserRepository userRepository, UserFetch userFetch) {
+    public UserPresenter(UserRepository userRepository, UserFetch userFetch, DisplayUserDataWrapper displayUserDataWrapper) {
         this.userRepository = userRepository;
         this.userFetch = userFetch;
+        this.displayUserDataWrapper = displayUserDataWrapper;
     }
 
     public void attachView(UserView userView) {
@@ -82,28 +84,6 @@ public class UserPresenter {
     }
 
     private void displayUserData() {
-        displayUserAvatar();
-        userView.displayLogin(user.login);
-        displayDetaisIfDownloaded();
-    }
-
-    private void displayDetaisIfDownloaded() {
-        if (user.isAllDataFetched) {
-            userView.displayName(user.name);
-            userView.displayFollowersCount(user.followers);
-            userView.displayRepositoriesCount(user.publicRepos);
-        }
-    }
-
-    private void displayUserAvatar() {
-        if (isNotEmpty(user.avatarUrl)) {
-            userView.displayAvatar(user.avatarUrl);
-        } else {
-            userView.displayAvatarPlaceholder();
-        }
-    }
-
-    private boolean isNotEmpty(String string) {
-        return string!=null && !string.equals("");
+        displayUserDataWrapper.displayUserData(userView, user);
     }
 }
