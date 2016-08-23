@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.ziomacki.github.R;
+import com.ziomacki.github.component.ResourceProvider;
 import com.ziomacki.github.search.model.SearchableItem;
 import org.greenrobot.eventbus.EventBus;
 import java.util.Collections;
@@ -16,10 +17,12 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsViewHolder> {
     private List<SearchableItem> resultItemList = Collections.emptyList();
 
     private EventBus eventBus;
+    private ResourceProvider resourceProvider;
 
     @Inject
-    public ResultsAdapter(EventBus eventBus) {
+    public ResultsAdapter(EventBus eventBus, ResourceProvider resourceProvider) {
         this.eventBus = eventBus;
+        this.resourceProvider = resourceProvider;
     }
 
     public void setResult(List<SearchableItem> resultItemList) {
@@ -37,7 +40,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsViewHolder> {
     @Override
     public void onBindViewHolder(ResultsViewHolder holder, int position) {
         SearchableItem resultItem = resultItemList.get(position);
-        holder.bind(resultItem, eventBus);
+        holder.bind(resultItem, eventBus, resourceProvider);
     }
 
     @Override

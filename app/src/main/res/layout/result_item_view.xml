@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:drawableLeft="@drawable/ic_repo"
         android:textSize="@dimen/result_item_title_size"
         android:gravity="center_vertical"/>
 
