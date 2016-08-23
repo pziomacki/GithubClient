@@ -11,8 +11,8 @@ class GitRepoRepositorySpec extends Specification {
             GitRepoRepository sut = new GitRepoRepository(realmWrapperMock)
             List<GitRepo> list = new ArrayList<GitRepo>()
         when:
-            sut.storeGitRepos(list)
+            sut.deleteOldAndStoreNewList(list)
         then:
-            realmWrapperMock.deleteOldAndStoreNewList(GitRepo.class, list)
+            1 * realmWrapperMock.deleteOldAndStoreNewList(GitRepo.class, list)
     }
 }
