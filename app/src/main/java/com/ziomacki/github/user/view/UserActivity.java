@@ -25,8 +25,6 @@ public class UserActivity extends AppCompatActivity implements UserView{
     ImageView avatarView;
     @BindView(R.id.user_name)
     TextView nameView;
-    @BindView(R.id.user_login)
-    TextView loginView;
     @BindView(R.id.user_followers)
     TextView followersView;
     @BindView(R.id.user_repositories)
@@ -48,6 +46,7 @@ public class UserActivity extends AppCompatActivity implements UserView{
         setContentView(R.layout.activity_user);
         ButterKnife.bind(this);
         injectDependencies();
+        setTitle("");
         userPresenter.attachView(this);
         userPresenter.readIntentExtras(getIntent().getExtras());
     }
@@ -76,7 +75,7 @@ public class UserActivity extends AppCompatActivity implements UserView{
 
     @Override
     public void displayLogin(String login) {
-        loginView.setText(login);
+        setTitle(login);
     }
 
     @Override
