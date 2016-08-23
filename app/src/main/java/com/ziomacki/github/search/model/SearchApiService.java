@@ -7,11 +7,8 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 public interface SearchApiService {
-
     @GET("search/repositories")
     Observable<SearchResults<GitRepo>> searchRespositories(@Query("q") String query);
-
     @GET("search/users")
     Observable<SearchResults<User>> searchUsers(@Query("q") String query);
-
 }

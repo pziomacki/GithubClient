@@ -99,5 +99,4 @@ public class UserActivity extends AppCompatActivity implements UserView{
     public void displayErrorMessage() {
         Snackbar.make(mainContainer, getString(R.string.user_error_message), Snackbar.LENGTH_LONG).show();
     }
-
 }

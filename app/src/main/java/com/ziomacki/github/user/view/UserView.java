@@ -8,5 +8,4 @@ public interface UserView {
     void displayFollowersCount(int followersCount);
     void displayAvatarPlaceholder();
     void displayErrorMessage();
-
 }

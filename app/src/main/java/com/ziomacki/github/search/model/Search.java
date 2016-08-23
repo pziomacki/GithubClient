@@ -45,7 +45,6 @@ public class Search {
             Collections.sort(result, new SearchableItemComparatorByIdAsc());
             return result;
         }
-
     }
 
     private class StoreUsers implements Action1<SearchResults<User>> {

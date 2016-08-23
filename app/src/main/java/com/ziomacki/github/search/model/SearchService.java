@@ -21,5 +21,4 @@ public class SearchService {
     public Observable<SearchResults<GitRepo>> searchForRepositories(String query) {
         return searchApiService.searchRespositories(query);
     }
-
 }
