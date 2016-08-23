@@ -46,7 +46,6 @@ public class UserActivity extends AppCompatActivity implements UserView{
         setContentView(R.layout.activity_user);
         ButterKnife.bind(this);
         injectDependencies();
-        setTitle("");
         userPresenter.attachView(this);
         userPresenter.readIntentExtras(getIntent().getExtras());
     }
