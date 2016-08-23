@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,7 +21,6 @@ import butterknife.ButterKnife;
 
 public class UserActivity extends AppCompatActivity implements UserView{
 
-
     @BindView(R.id.user_avater)
     ImageView avatarView;
     @BindView(R.id.user_name)
@@ -29,6 +29,8 @@ public class UserActivity extends AppCompatActivity implements UserView{
     TextView followersView;
     @BindView(R.id.user_repositories)
     TextView repositoriesView;
+    @BindView(R.id.user_toolbar)
+    Toolbar toolbar;
     @BindView(R.id.user_container)
     LinearLayout mainContainer;
     @Inject
@@ -46,6 +48,7 @@ public class UserActivity extends AppCompatActivity implements UserView{
         setContentView(R.layout.activity_user);
         ButterKnife.bind(this);
         injectDependencies();
+        setSupportActionBar(toolbar);
         userPresenter.attachView(this);
         userPresenter.readIntentExtras(getIntent().getExtras());
     }
