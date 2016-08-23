@@ -70,6 +70,7 @@ public class SearchPresenter {
             SearchSavedInstanceHelper searchSavedInstanceHelper = new SearchSavedInstanceHelper();
             query = searchSavedInstanceHelper.getQuery(savedInstance);
             isSearchSuccessful = searchSavedInstanceHelper.isSearchMade(savedInstance);
+            searchView.setSearchQuery(query);
             readResultsFromDBOnRestore();
         }
     }
@@ -118,9 +119,5 @@ public class SearchPresenter {
 
     public void onUserOpenEvent(OnUserOpenEvent event) {
         searchView.openUserView(event.id);
-    }
-
-    public void onCreateOptionsMenu() {
-        searchView.setSearchQuery(query);
     }
 }

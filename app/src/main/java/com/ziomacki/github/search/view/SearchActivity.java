@@ -2,13 +2,11 @@ package com.ziomacki.github.search.view;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.widget.Toolbar;
 import com.jakewharton.rxbinding.support.v4.widget.RxSwipeRefreshLayout;
 import com.jakewharton.rxbinding.widget.RxSearchView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -39,6 +37,10 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     RecyclerView resultsRecyclerView;
     @BindView(R.id.search_swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.search_search_view)
+    android.widget.SearchView searchView;
+    @BindView(R.id.search_toolbar)
+    Toolbar toolbar;
     @Inject
     SearchPresenter searchPresenter;
     @Inject
@@ -47,7 +49,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     EventBus eventBus;
     private Subscription searchInputSubscription = Subscriptions.empty();
     private Subscription refreshSubscription = Subscriptions.empty();
-    private android.widget.SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +56,17 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
         injectDependencies();
-        initRecyclerView();
-        subscribeToSwipeToRefresh();
+        initViews();
         searchPresenter.attachView(this);
         searchPresenter.restoreState(savedInstanceState);
+    }
+
+    private void initViews() {
+        setupRecyclerView();
+        setupSearchView();
+        subscribeToSwipeToRefresh();
+        setSupportActionBar(toolbar);
+        setupSearchView();
     }
 
     @Override
@@ -99,19 +107,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
-        searchView = (android.widget.SearchView) MenuItemCompat.getActionView(item);
-        searchView.setIconified(false);
-        searchView.setQueryHint(getString(R.string.search_hint));
-        searchView.clearFocus();
-        subscribeToSearchViewQueries(searchView);
-        searchPresenter.onCreateOptionsMenu();
-        return true;
-    }
-
-    @Override
     public void setSearchQuery(String query) {
         searchView.setQuery(query, false);
     }
@@ -123,7 +118,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
                 .subscribe(new SearchTextChanged());
     }
 
-    private void initRecyclerView() {
+    private void setupRecyclerView() {
         resultsRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         HorizontalDividerItemDecoration listDivider = new HorizontalDividerItemDecoration
@@ -132,6 +127,14 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         resultsRecyclerView.setAdapter(resultsAdapter);
         resultsRecyclerView.addItemDecoration(listDivider);
     }
+
+    private void setupSearchView() {
+        searchView.setIconifiedByDefault(false);
+        searchView.setQueryHint(getString(R.string.search_hint));
+        searchView.clearFocus();
+        subscribeToSearchViewQueries(searchView);
+    }
+
 
     @Override
     public void displayResults(List<SearchableItem> resultItemList) {
