@@ -12,5 +12,4 @@ public class SearchModule {
     public SearchApiService provideSearchApiService(Retrofit retrofit) {
         return retrofit.create(SearchApiService.class);
     }
-
 }

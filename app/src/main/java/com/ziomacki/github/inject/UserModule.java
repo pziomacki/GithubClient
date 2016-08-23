@@ -12,5 +12,4 @@ public class UserModule {
     public UserApiService provideUserApiService(Retrofit retrofit) {
         return retrofit.create(UserApiService.class);
     }
-
 }

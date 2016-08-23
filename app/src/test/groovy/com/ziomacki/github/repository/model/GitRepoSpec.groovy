@@ -27,5 +27,4 @@ class GitRepoSpec extends Specification {
             OnGitRepoOpenEvent onGitRepoOpenEvent = (OnGitRepoOpenEvent) event
             onGitRepoOpenEvent.id == 12
     }
-
 }

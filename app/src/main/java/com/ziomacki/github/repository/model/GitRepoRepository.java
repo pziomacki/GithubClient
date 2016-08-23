@@ -13,7 +13,7 @@ public class GitRepoRepository {
         this.realmWrapper = realmWrapper;
     }
 
-    public void storeGitRepos(List<GitRepo> gitRepoList) {
+    public void deleteOldAndStoreNewList(List<GitRepo> gitRepoList) {
         realmWrapper.deleteOldAndStoreNewList(GitRepo.class, gitRepoList);
     }
 }

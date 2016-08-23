@@ -58,7 +58,7 @@ public class Search {
     private class StoreGitRepos implements Action1<SearchResults<GitRepo>> {
         @Override
         public void call(SearchResults<GitRepo> gitRepoSearchResults) {
-            gitRepoRepository.storeGitRepos(gitRepoSearchResults.items);
+            gitRepoRepository.deleteOldAndStoreNewList(gitRepoSearchResults.items);
         }
     }
 }

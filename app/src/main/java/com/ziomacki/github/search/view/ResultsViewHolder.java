@@ -52,5 +52,4 @@ public class ResultsViewHolder extends RecyclerView.ViewHolder {
         resultItemTitle.setText(title);
         resultItemTitle.setCompoundDrawablesWithIntrinsicBounds(resourceProvider.getDrawable(iconId), null, null, null);
     }
-
 }

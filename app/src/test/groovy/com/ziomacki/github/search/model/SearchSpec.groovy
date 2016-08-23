@@ -56,7 +56,7 @@ class SearchSpec extends Specification {
             results.get(1).getId() == 4
     }
 
-    def "get non empty list if only repositories were found"() {
+    def "get non empty list if repositories were found"() {
         given:
             TestSubscriber<SearchableItem> testSubscriber = new TestSubscriber<>()
             SearchService searchServiceStub = Stub(SearchService)

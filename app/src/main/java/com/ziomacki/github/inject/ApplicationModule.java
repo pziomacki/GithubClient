@@ -22,7 +22,6 @@ public class ApplicationModule {
         EventBus.builder().addIndex(new GithubBusIndex()).installDefaultEventBus();
     }
 
-
     @Provides
     public Context provideApplicationContext() {
         return appContext;

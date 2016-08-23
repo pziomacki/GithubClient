@@ -160,7 +160,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
     }
 
     class SearchTextChanged implements Action1<CharSequence> {
-
         @Override
         public void call(CharSequence charSequence) {
             searchPresenter.searchAction(charSequence.toString());

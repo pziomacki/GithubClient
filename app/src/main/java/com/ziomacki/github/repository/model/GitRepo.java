@@ -9,8 +9,6 @@ import io.realm.RealmObject;
 
 public class GitRepo extends RealmObject implements SearchableItem {
 
-    private static final String TYPE = "GIT_REPO";
-
     @SerializedName("id")
     public long id;
     @SerializedName("full_name")

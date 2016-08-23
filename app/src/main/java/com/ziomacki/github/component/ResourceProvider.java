@@ -14,5 +14,4 @@ public class ResourceProvider {
     public Drawable getDrawable(int drawableID) {
         return context.getDrawable(drawableID);
     }
-
 }
