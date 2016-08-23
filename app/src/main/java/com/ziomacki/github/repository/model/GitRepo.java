@@ -1,6 +1,7 @@
 package com.ziomacki.github.repository.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.ziomacki.github.R;
 import com.ziomacki.github.search.eventbus.OnGitRepoOpenEvent;
 import com.ziomacki.github.search.eventbus.SearchableItemOpenEvent;
 import com.ziomacki.github.search.model.SearchableItem;
@@ -12,12 +13,12 @@ public class GitRepo extends RealmObject implements SearchableItem {
 
     @SerializedName("id")
     public long id;
-    @SerializedName("name")
-    public String name;
+    @SerializedName("full_name")
+    public String fullName;
 
     @Override
     public String getNameForList() {
-        return name;
+        return fullName;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class GitRepo extends RealmObject implements SearchableItem {
     }
 
     @Override
-    public String getItemType() {
-        return TYPE;
+    public int getItemIconId() {
+        return R.drawable.ic_repo;
     }
 }

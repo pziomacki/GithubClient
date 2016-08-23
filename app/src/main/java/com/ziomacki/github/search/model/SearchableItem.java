@@ -7,6 +7,6 @@ public interface SearchableItem {
     String getNameForList();
     long getId();
     SearchableItemOpenEvent getSearchableItemOpenEvent();
-    String getItemType();
+    int getItemIconId();
 
 }
