@@ -1,6 +1,7 @@
 package com.ziomacki.github.user.presenter;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import com.ziomacki.github.user.model.User;
 import com.ziomacki.github.user.model.UserFetch;
 import com.ziomacki.github.user.model.UserRepository;
@@ -21,7 +22,6 @@ public class UserPresenter {
     private User user;
     private long userId;
     private CompositeSubscription subscriptions = new CompositeSubscription();
-    private DisplayUserDataWrapper displayUserDataWrapper;
 
     private Action1<User> fetchUserSuccessful = new Action1<User>() {
         @Override
@@ -38,10 +38,9 @@ public class UserPresenter {
     };
 
     @Inject
-    public UserPresenter(UserRepository userRepository, UserFetch userFetch, DisplayUserDataWrapper displayUserDataWrapper) {
+    public UserPresenter(UserRepository userRepository, UserFetch userFetch) {
         this.userRepository = userRepository;
         this.userFetch = userFetch;
-        this.displayUserDataWrapper = displayUserDataWrapper;
     }
 
     public void attachView(UserView userView) {
@@ -83,7 +82,25 @@ public class UserPresenter {
         subscriptions.clear();
     }
 
-    private void displayUserData() {
-        displayUserDataWrapper.displayUserData(userView, user);
+    void displayUserData() {
+        displayUserAvatar(userView, user.avatarUrl);
+        userView.displayLogin(user.login);
+        displayDetaisIfDownloaded(userView, user);
+    }
+
+    private void displayDetaisIfDownloaded(UserView userView, User user) {
+        if (user.isAllDataFetched) {
+            userView.displayName(user.name);
+            userView.displayFollowersCount(user.followers);
+            userView.displayRepositoriesCount(user.publicRepos);
+        }
+    }
+
+    private void displayUserAvatar(UserView userView, String avatarUrl) {
+        if (!TextUtils.isEmpty(avatarUrl)) {
+            userView.displayAvatar(avatarUrl);
+        } else {
+            userView.displayAvatarPlaceholder();
+        }
     }
 }
