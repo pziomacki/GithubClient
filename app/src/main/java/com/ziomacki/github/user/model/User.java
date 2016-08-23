@@ -1,6 +1,7 @@
 package com.ziomacki.github.user.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.ziomacki.github.R;
 import com.ziomacki.github.search.eventbus.OnUserOpenEvent;
 import com.ziomacki.github.search.eventbus.SearchableItemOpenEvent;
 import com.ziomacki.github.search.model.SearchableItem;
@@ -40,5 +41,10 @@ public class User extends RealmObject implements SearchableItem {
     @Override
     public SearchableItemOpenEvent getSearchableItemOpenEvent() {
         return new OnUserOpenEvent(id);
+    }
+
+    @Override
+    public int getItemIconId() {
+        return R.drawable.ic_user;
     }
 }
